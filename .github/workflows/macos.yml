@@ -32,7 +32,7 @@ jobs:
     # Important to zip first so executable file attributes are preserved.
     - name: Zip Artifacts
       run: |
-        zip -r macos-helloworld.zip src/HelloWorld/bin/Release/net5.0/osx-x64/publish/
+        zip -r macos-helloworld.zip src/HelloWorld/bin/Release/net5.0/osx-x64/publish/*
                 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
