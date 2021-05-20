@@ -29,16 +29,22 @@ jobs:
       working-directory: src/HelloWorld
       run: dotnet publish -c Release -r osx-x64
 
+    - name: Move Build Output
+      run: |
+        mkdir build/
+        cp src/HelloWorld/bin/Release/net5.0/osx-x64/publish/* build/
+
     # Important to zip first so executable file attributes are preserved.
     - name: Zip Artifacts
+      working-directory: build/
       run: |
-        zip -r macos-helloworld.zip src/HelloWorld/bin/Release/net5.0/osx-x64/publish/*
+        zip -r macos-helloworld.zip ./*        
                 
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
       with:
         name: enclave-helloworld-x64
-        path: macos-helloworld.zip
+        path: build/macos-helloworld.zip
         retention-days: 3
         
 
