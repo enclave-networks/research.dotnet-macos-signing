@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{9B4A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{483C3CA8-24DB-48B2-9CDF-30F394A0DE41}"
 	ProjectSection(SolutionItems) = preProject
-		macos.yml = macos.yml
+		.github\workflows\macos.yml = .github\workflows\macos.yml
 	EndProjectSection
 EndProject
 Global
