@@ -1,0 +1,44 @@
+name: HelloWorldOsx
+
+on: [ push, pull_request ]
+
+jobs:
+  build:
+
+    name: Build Console App
+  
+    runs-on: macos-latest
+    
+    env:
+        DOTNET_NOLOGO: true
+
+    steps:
+
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    # We want 5.0 for the SDK...
+    - name: Setup .NET 5 (SDK)
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x   
+
+    # Build the program.
+    - name: Build
+      working-directory: src/HelloWorld
+      run: dotnet publish -c Release -r osx-x64
+
+    # Important to zip first so executable file attributes are preserved.
+    - name: Zip Artifacts
+      run: |
+        zip -r macos-helloworld.zip src/HelloWorld/bin/Release/net5.0/osx-x64/publish/
+                
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: enclave-helloworld-x64
+        path: macos-helloworld.zip
+        retention-days: 3
+        
+
